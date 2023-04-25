@@ -1,10 +1,14 @@
 <script lang="ts">
+  import { useLessonsStore } from "@/stores/lessonsStore";
+  import { storeToRefs } from "pinia";
+
   export default {
     name: "LessonVideo",
     setup() {
-      const url = "https://www.youtube.com/embed/0lzg9NnWt30";
+      const lessonsStore = useLessonsStore();
+      const { currenLessonData } = storeToRefs(lessonsStore);
       return {
-        url,
+        currenLessonData,
       };
     },
   };
@@ -12,10 +16,8 @@
 
 <template>
   <iframe
-    width="560"
-    height="315"
-    :src="url"
+    :src="currenLessonData.video_url"
     allowfullscreen
-    class="w-full"
+    class="w-full h-96"
   ></iframe>
 </template>
