@@ -1,9 +1,13 @@
-<script setup lang="ts">
-
+<script lang="ts">
+  import LessonsView from "@/views/LessonsView.vue";
+  export default {
+    name: "App",
+    components: {
+      LessonsView,
+    },
+  };
 </script>
 
 <template>
-  <h1 class="text-3xl font-bold underline">
-    Tailwind check
-  </h1>
+  <LessonsView />
 </template>
