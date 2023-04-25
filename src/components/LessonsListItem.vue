@@ -1,6 +1,15 @@
 <script lang="ts">
+  import type { Lesson } from "@/stores/lessonsStore";
+  import type { PropType } from "vue";
+
   export default {
     name: "LessonsListItem",
+    props: {
+      lesson: {
+        type: Object as PropType<Lesson>,
+        required: true,
+      },
+    },
   };
 </script>
 
@@ -25,7 +34,7 @@
       </svg>
     </div>
     <div class="w-3/4 bg-orange-500 flex justify-center items-center">
-      <span class="text-2xl text-white">Lesson title</span>
+      <span class="text-2xl text-white">{{ lesson.title }}</span>
     </div>
   </div>
 </template>
