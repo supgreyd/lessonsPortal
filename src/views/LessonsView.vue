@@ -48,7 +48,7 @@
         </div>
         <LessonNotification />
       </div>
-      <template #fallback> Loading... </template>
+      <template v-else> Loading... </template>
     </Suspense>
   </AppLayout>
 </template>

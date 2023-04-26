@@ -1,11 +1,11 @@
 <script lang="ts">
-import type { Lesson } from "@/stores/lessonsStore";
+  import type { Lesson } from "@/stores/lessonsStore";
 
-import {computed, defineComponent} from "vue";
-import {useLessonsStore} from "@/stores/lessonsStore";
-import {storeToRefs} from "pinia";
+  import { computed, defineComponent } from "vue";
+  import { useLessonsStore } from "@/stores/lessonsStore";
+  import { storeToRefs } from "pinia";
 
-  export default defineComponent ({
+  export default defineComponent({
     name: "LessonsListItem",
     props: {
       lesson: {
@@ -19,19 +19,19 @@ import {storeToRefs} from "pinia";
 
       const lessonStatus = computed(() => {
         if (completedLessons.value.includes(props.lesson.id)) {
-          return "completed"
+          return "completed";
         }
-        if ( availableLessons.value.includes(props.lesson.id) ) {
-          return "available"
+        if (availableLessons.value.includes(props.lesson.id)) {
+          return "available";
         } else {
-          return "locked"
+          return "locked";
         }
-      })
+      });
 
       return {
         lessonStatus,
-      }
-    }
+      };
+    },
   });
 </script>
 
@@ -39,7 +39,13 @@ import {storeToRefs} from "pinia";
   <div :class="['flex h-24', lessonStatus === 'locked' ? 'cursor-not-allowed' : 'cursor-pointer']">
     <div class="w-1/4 bg-black flex justify-center items-center">
       <svg
-        :class="[lessonStatus === 'completed' ? 'stroke-green-500' : lessonStatus === 'available' ? 'stroke-orange-500' : 'stroke-gray-500']"
+        :class="[
+          lessonStatus === 'completed'
+            ? 'stroke-green-500'
+            : lessonStatus === 'available'
+            ? 'stroke-orange-500'
+            : 'stroke-gray-500',
+        ]"
         height="24"
         width="24"
         fill="none"
@@ -55,10 +61,16 @@ import {storeToRefs} from "pinia";
         ></path>
       </svg>
     </div>
-    <div :class="[
-        'w-3/4 bg-orange-500 flex justify-center items-center',
-        lessonStatus === 'completed' ? 'bg-green-500' : lessonStatus === 'available' ? 'bg-orange-500' : 'bg-gray-500'
-        ]">
+    <div
+      :class="[
+        'w-3/4 flex justify-center items-center',
+        lessonStatus === 'completed'
+          ? 'bg-green-500'
+          : lessonStatus === 'available'
+          ? 'bg-orange-500'
+          : 'bg-gray-500',
+      ]"
+    >
       <span class="text-2xl text-white p-4">{{ lesson.title }}</span>
     </div>
   </div>

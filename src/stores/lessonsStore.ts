@@ -15,7 +15,7 @@ export const useLessonsStore = defineStore("lessons", () => {
   const availableLessons = ref<String[]>([]);
   const completedLessons = ref<String[]>([]);
   const currentLessonId = ref("0lzg9NnWt30");
-  const showNotification = ref(false)
+  const showNotification = ref(false);
   let loading = ref(false);
 
   const currenLessonData = computed(() => {
@@ -36,7 +36,7 @@ export const useLessonsStore = defineStore("lessons", () => {
 
   function setCurrentLesson(id: string) {
     showNotification.value = false;
-    if(availableLessons.value.includes(id)) {
+    if (availableLessons.value.includes(id)) {
       currentLessonId.value = id;
     }
   }
@@ -47,15 +47,15 @@ export const useLessonsStore = defineStore("lessons", () => {
   }
 
   function setAvailableLessons(id: string) {
-    availableLessons.value.push(id)
+    availableLessons.value.push(id);
   }
 
   function getNextLessonId(id: string) {
     const currentIndex = lessons.value.findIndex(obj => obj.id === id);
     if (currentIndex >= lessons.value.length - 1) {
-      return lessons.value[currentIndex].id
+      return lessons.value[currentIndex].id;
     }
-    return lessons.value[currentIndex + 1].id
+    return lessons.value[currentIndex + 1].id;
   }
 
   fetchLessons();

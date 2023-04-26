@@ -26,7 +26,7 @@
 <template>
   <ul class="flex flex-col gap-4">
     <li
-      v-for="(lesson) in lessons"
+      v-for="lesson in lessons"
       :key="lesson.id"
       @click="handleClick(lesson.id)"
     >
