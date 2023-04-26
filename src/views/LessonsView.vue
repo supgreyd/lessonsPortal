@@ -3,6 +3,7 @@
   import LessonsList from "@/components/LessonsList.vue";
   import LessonDescription from "@/components/LessonDescription.vue";
   import LessonVideo from "@/components/LessonVideo.vue";
+  import LessonNotification from "@/components/LessonNotification.vue";
 
   import { useLessonsStore } from "@/stores/lessonsStore";
   import { storeToRefs } from "pinia";
@@ -14,6 +15,7 @@
       LessonsList,
       LessonDescription,
       LessonVideo,
+      LessonNotification,
     },
     setup() {
       const lessonsStore = useLessonsStore();
@@ -44,6 +46,7 @@
             <LessonsList />
           </div>
         </div>
+        <LessonNotification />
       </div>
       <template #fallback> Loading... </template>
     </Suspense>
