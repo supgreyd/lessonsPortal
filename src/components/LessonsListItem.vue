@@ -1,23 +1,45 @@
 <script lang="ts">
-  import type { Lesson } from "@/stores/lessonsStore";
-  import type { PropType } from "vue";
+import type { Lesson } from "@/stores/lessonsStore";
 
-  export default {
+import {computed, defineComponent} from "vue";
+import {useLessonsStore} from "@/stores/lessonsStore";
+import {storeToRefs} from "pinia";
+
+  export default defineComponent ({
     name: "LessonsListItem",
     props: {
       lesson: {
-        type: Object as PropType<Lesson>,
+        type: Object as () => Lesson,
         required: true,
       },
     },
-  };
+    setup(props) {
+      const lessonsStore = useLessonsStore();
+      const { completedLessons, availableLessons } = storeToRefs(lessonsStore);
+
+      const lessonStatus = computed(() => {
+        if (completedLessons.value.includes(props.lesson.id)) {
+          return "completed"
+        }
+        if ( availableLessons.value.includes(props.lesson.id) ) {
+          return "available"
+        } else {
+          return "locked"
+        }
+      })
+
+      return {
+        lessonStatus,
+      }
+    }
+  });
 </script>
 
 <template>
-  <div class="flex h-24">
-    <div class="w-1/4 bg-gray-600 flex justify-center items-center">
+  <div :class="['flex h-24', lessonStatus === 'locked' ? 'cursor-not-allowed' : 'cursor-pointer']">
+    <div class="w-1/4 bg-black flex justify-center items-center">
       <svg
-        class="stroke-white"
+        :class="[lessonStatus === 'completed' ? 'stroke-green-500' : lessonStatus === 'available' ? 'stroke-orange-500' : 'stroke-gray-500']"
         height="24"
         width="24"
         fill="none"
@@ -33,8 +55,11 @@
         ></path>
       </svg>
     </div>
-    <div class="w-3/4 bg-orange-500 flex justify-center items-center">
-      <span class="text-2xl text-white">{{ lesson.title }}</span>
+    <div :class="[
+        'w-3/4 bg-orange-500 flex justify-center items-center',
+        lessonStatus === 'completed' ? 'bg-green-500' : lessonStatus === 'available' ? 'bg-orange-500' : 'bg-gray-500'
+        ]">
+      <span class="text-2xl text-white p-4">{{ lesson.title }}</span>
     </div>
   </div>
 </template>
